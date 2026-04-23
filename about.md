@@ -9,11 +9,15 @@ permalink: /about/
 
 Hello! I'm sure most if not all of you know me, so for the likely none of you that don't, I'm Kyle, and this is where I post because it's quite frankly cheaper than therapy.
 
-I got the inspiration for this blog because I've always wanted to put some stream of consciousness out there into the ether, and one night after a run, I decided to go for it and ended up creating this. (Can you believe it only took 2 hours?)
+I got the inspiration for this blog because I've always wanted to put some stream of consciousness out there into the ether, and one night after a run, I decided to go for it and ended up creating this. (Can you believe it only took 2 hours and cost $3?)
 
 ## Facts about me
 
 Name: Kyle (but you already knew that)
+
+Job: computer
+
+Hometown: San Diego, California
 
 Height: tall enough
 
