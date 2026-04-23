@@ -1,0 +1,49 @@
+---
+layout: default
+title: Blog
+---
+<h1 class="page-title">All posts</h1>
+<p class="lede">Grouped by year. Use the filter to narrow the list.</p>
+
+{% assign all_years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" | sort: "name" | reverse %}
+
+<div class="archive-toolbar">
+  <label for="year-filter">Year</label>
+  <select id="year-filter" aria-label="Filter posts by year">
+    <option value="all">All years</option>
+    {% for group in all_years %}
+    <option value="{{ group.name }}">{{ group.name }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+{% for group in all_years %}
+<section class="year-block" data-year="{{ group.name }}">
+  <h2 class="year-heading">{{ group.name }}</h2>
+  <ul class="archive-list">
+    {% assign items = group.items | sort: "date" | reverse %}
+    {% for post in items %}
+    <li class="archive-item">
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+
+<script>
+(function () {
+  var sel = document.getElementById('year-filter');
+  if (!sel) return;
+  function apply() {
+    var v = sel.value;
+    document.querySelectorAll('.year-block').forEach(function (sec) {
+      var y = sec.getAttribute('data-year');
+      sec.hidden = v !== 'all' && y !== v;
+    });
+  }
+  sel.addEventListener('change', apply);
+  apply();
+})();
+</script>

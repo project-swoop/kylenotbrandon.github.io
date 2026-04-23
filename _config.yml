@@ -1,0 +1,19 @@
+title: "kyle speaks on..."
+description: "can you believe this was $3 for a whole year of fun?."
+url: "https://kylenotbrandon.blog"
+permalink: /blog/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
+
+paginate: 5
+paginate_path: "/page:num/"
+
+markdown: kramdown
+highlighter: rouge
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
