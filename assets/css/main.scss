@@ -1,3 +1,10 @@
+---
+---
+$asset-bliss: "{{ '/assets/img/bliss.jpg' | relative_url }}";
+$asset-start-n: "{{ '/assets/img/start-normal.png' | relative_url }}";
+$asset-start-h: "{{ '/assets/img/start-hover.png' | relative_url }}";
+$asset-start-a: "{{ '/assets/img/start-active.png' | relative_url }}";
+
 /* Web 1.0 / Windows 98–XP “circa 2002” vibes */
 :root {
   --tb-h: 34px;
@@ -56,7 +63,7 @@ body.win-body {
   line-height: 1.45;
   color: var(--text);
   background-color: #3a6ea4;
-  background-image: url("../img/bliss.jpg");
+  background-image: url($asset-bliss);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -616,6 +623,8 @@ input[type="text"] {
   right: 0;
   bottom: 0;
   width: 100%;
+  max-width: 100%;
+  min-width: 100%;
   height: var(--tb-h);
   display: flex;
   align-items: stretch;
@@ -644,16 +653,16 @@ input[type="text"] {
   background-repeat: no-repeat;
   background-position: 0 50%;
   background-size: 100% 100%;
-  background-image: url("../img/start-normal.png");
+  background-image: url($asset-start-n);
 }
 
 .xp-start-btn:hover {
-  background-image: url("../img/start-hover.png");
+  background-image: url($asset-start-h);
 }
 
 .xp-start-btn:active,
 .xp-start-btn.is-open {
-  background-image: url("../img/start-active.png");
+  background-image: url($asset-start-a);
 }
 
 .xp-start-btn:focus-visible {
