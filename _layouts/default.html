@@ -10,19 +10,36 @@
 </head>
 <body class="win-body">
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <div id="start-menu" class="start-menu" hidden>
+    <div class="start-menu-side" aria-hidden="true"></div>
+    <div class="start-menu-panel">
+      <p class="start-menu-heading">{{ site.title }}</p>
+      <ul class="start-menu-list">
+        <li><a class="start-menu-item" href="{{ '/' | relative_url }}"><img src="{{ '/assets/img/icon-home.png' | relative_url }}" width="32" height="32" alt="">Home</a></li>
+        <li><a class="start-menu-item" href="{{ '/blog/' | relative_url }}"><img src="{{ '/assets/img/icon-blog.png' | relative_url }}" width="32" height="32" alt="">Blog</a></li>
+        <li><a class="start-menu-item" href="{{ '/about/' | relative_url }}"><img src="{{ '/assets/img/icon-about.png' | relative_url }}" width="32" height="32" alt="">About</a></li>
+        <li><a class="start-menu-item" href="{{ '/contact/' | relative_url }}"><img src="{{ '/assets/img/icon-contact.png' | relative_url }}" width="32" height="32" alt="">Contact</a></li>
+      </ul>
+      <div class="start-menu-footer">
+        <a href="https://pages.github.com/">GitHub Pages</a>
+      </div>
+    </div>
+  </div>
+
   <div class="site-shell">
     <header class="win-titlebar" role="banner">
       <div class="win-titlebar-text">
-        <span class="win-title-icon" aria-hidden="true"></span>
+        <img class="win-title-icon-img" src="{{ '/assets/img/icon-title.png' | relative_url }}" width="16" height="16" alt="">
         <a class="win-title-link" href="{{ '/' | relative_url }}">{{ site.title }}</a>
       </div>
-      <div class="win-titlebar-controls" aria-hidden="true">
-        <span class="win-btn win-btn-min"></span>
-        <span class="win-btn win-btn-max"></span>
-        <span class="win-btn win-btn-close"></span>
+      <div class="win-titlebar-controls-wrap" aria-hidden="true">
+        <img class="win-cbtn" src="{{ '/assets/img/win-min.png' | relative_url }}" width="21" height="21" alt="">
+        <img class="win-cbtn" src="{{ '/assets/img/win-max.png' | relative_url }}" width="21" height="21" alt="">
+        <img class="win-cbtn" src="{{ '/assets/img/win-close.png' | relative_url }}" width="21" height="21" alt="">
       </div>
     </header>
-    <nav class="win-menubar" aria-label="Primary">
+    <nav class="win-menubar" aria-label="Primary (classic menu bar)">
       <a href="{{ '/' | relative_url }}">Home</a>
       <a href="{{ '/blog/' | relative_url }}">Blog</a>
       <a href="{{ '/about/' | relative_url }}">About</a>
@@ -40,5 +57,61 @@
       </div>
     </footer>
   </div>
+
+  <div class="xp-taskbar" role="navigation" aria-label="Windows XP style taskbar">
+    <button type="button" id="xp-start-btn" class="xp-start-btn" aria-expanded="false" aria-controls="start-menu" aria-haspopup="true">
+      <span class="sr-only">Start</span>
+    </button>
+    <span class="xp-taskbar-spacer" aria-hidden="true"></span>
+    <div class="xp-tray">
+      <div class="xp-tray-clock" id="xp-tray-clock" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var btn = document.getElementById('xp-start-btn');
+    var menu = document.getElementById('start-menu');
+    var clockEl = document.getElementById('xp-tray-clock');
+    if (!btn || !menu) return;
+
+    function setOpen(open) {
+      menu.hidden = !open;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.classList.toggle('is-open', open);
+    }
+
+    function isOpen() {
+      return !menu.hidden;
+    }
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setOpen(!isOpen());
+    });
+
+    document.addEventListener('click', function () {
+      if (isOpen()) setOpen(false);
+    });
+    menu.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (e.target.closest('a.start-menu-item')) setOpen(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) setOpen(false);
+    });
+
+    function tickClock() {
+      if (!clockEl) return;
+      var d = new Date();
+      var t = d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit', hour12: true });
+      var date = d.toLocaleDateString(undefined, { month: 'numeric', day: 'numeric', year: 'numeric' });
+      clockEl.textContent = t + '  ' + date;
+    }
+    tickClock();
+    setInterval(tickClock, 1000);
+  })();
+  </script>
 </body>
 </html>
