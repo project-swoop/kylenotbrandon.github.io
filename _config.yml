@@ -17,6 +17,9 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
+  # CI / local: gems live here — Jekyll must not scan them (would try to parse gem _posts templates)
+  - vendor
+  - .bundle
 
 sass:
   style: compressed
