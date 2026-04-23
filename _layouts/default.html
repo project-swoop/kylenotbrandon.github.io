@@ -8,28 +8,37 @@
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   {% feed_meta %}
 </head>
-<body>
+<body class="win-body">
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <div class="inner">
-      <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
-      <nav class="site-nav" aria-label="Primary">
-        <a href="{{ '/' | relative_url }}">Home</a>
-        <a href="{{ '/blog/' | relative_url }}">Blog</a>
-        <a href="{{ '/about/' | relative_url }}">About</a>
-        <a href="{{ '/contact/' | relative_url }}">Contact</a>
-      </nav>
-    </div>
-  </header>
-  <main id="main" class="site-main">
-    <div class="inner">
-      {{ content }}
-    </div>
-  </main>
-  <footer class="site-footer">
-    <div class="inner">
-      <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Hosted on <a href="https://pages.github.com/">GitHub Pages</a>.</p>
-    </div>
-  </footer>
+  <div class="site-shell">
+    <header class="win-titlebar" role="banner">
+      <div class="win-titlebar-text">
+        <span class="win-title-icon" aria-hidden="true"></span>
+        <a class="win-title-link" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      </div>
+      <div class="win-titlebar-controls" aria-hidden="true">
+        <span class="win-btn win-btn-min"></span>
+        <span class="win-btn win-btn-max"></span>
+        <span class="win-btn win-btn-close"></span>
+      </div>
+    </header>
+    <nav class="win-menubar" aria-label="Primary">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/blog/' | relative_url }}">Blog</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ '/contact/' | relative_url }}">Contact</a>
+    </nav>
+    <main id="main" class="win-client">
+      <div class="inner">
+        {{ content }}
+      </div>
+    </main>
+    <footer class="win-statusbar" role="contentinfo">
+      <div class="inner win-status-inner">
+        <span class="win-status-left">Ready</span>
+        <span class="win-status-right">&copy; {{ site.time | date: '%Y' }} · <a href="https://pages.github.com/">GitHub Pages</a></span>
+      </div>
+    </footer>
+  </div>
 </body>
 </html>

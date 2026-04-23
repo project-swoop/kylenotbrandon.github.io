@@ -3,18 +3,38 @@ layout: default
 title: Blog
 ---
 <h1 class="page-title">All posts</h1>
-<p class="lede">Grouped by year. Use the filter to narrow the list.</p>
+<p class="lede">Grouped by year. Filter by <strong>year</strong> and/or <strong>month</strong> below.</p>
 
 {% assign all_years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" | sort: "name" | reverse %}
 
-<div class="archive-toolbar">
-  <label for="year-filter">Year</label>
-  <select id="year-filter" aria-label="Filter posts by year">
-    <option value="all">All years</option>
-    {% for group in all_years %}
-    <option value="{{ group.name }}">{{ group.name }}</option>
-    {% endfor %}
-  </select>
+<div class="archive-toolbar" role="group" aria-label="Filter archive">
+  <div class="archive-field">
+    <label for="year-filter">Year</label>
+    <select id="year-filter" aria-label="Filter by year">
+      <option value="all">All years</option>
+      {% for group in all_years %}
+      <option value="{{ group.name }}">{{ group.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="archive-field">
+    <label for="month-filter">Month</label>
+    <select id="month-filter" aria-label="Filter by month">
+      <option value="all">All months</option>
+      <option value="01">January</option>
+      <option value="02">February</option>
+      <option value="03">March</option>
+      <option value="04">April</option>
+      <option value="05">May</option>
+      <option value="06">June</option>
+      <option value="07">July</option>
+      <option value="08">August</option>
+      <option value="09">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    </select>
+  </div>
 </div>
 
 {% for group in all_years %}
@@ -23,7 +43,7 @@ title: Blog
   <ul class="archive-list">
     {% assign items = group.items | sort: "date" | reverse %}
     {% for post in items %}
-    <li class="archive-item">
+    <li class="archive-item" data-year="{{ post.date | date: '%Y' }}" data-month="{{ post.date | date: '%m' }}">
       <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
       <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
     </li>
@@ -34,16 +54,26 @@ title: Blog
 
 <script>
 (function () {
-  var sel = document.getElementById('year-filter');
-  if (!sel) return;
+  var yearSel = document.getElementById('year-filter');
+  var monthSel = document.getElementById('month-filter');
+  if (!yearSel || !monthSel) return;
   function apply() {
-    var v = sel.value;
+    var y = yearSel.value;
+    var m = monthSel.value;
     document.querySelectorAll('.year-block').forEach(function (sec) {
-      var y = sec.getAttribute('data-year');
-      sec.hidden = v !== 'all' && y !== v;
+      var any = false;
+      sec.querySelectorAll('.archive-item').forEach(function (li) {
+        var okY = y === 'all' || li.getAttribute('data-year') === y;
+        var okM = m === 'all' || li.getAttribute('data-month') === m;
+        var show = okY && okM;
+        li.hidden = !show;
+        if (show) any = true;
+      });
+      sec.hidden = !any;
     });
   }
-  sel.addEventListener('change', apply);
+  yearSel.addEventListener('change', apply);
+  monthSel.addEventListener('change', apply);
   apply();
 })();
 </script>
