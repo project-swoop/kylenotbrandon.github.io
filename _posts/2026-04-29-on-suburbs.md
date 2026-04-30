@@ -1,8 +1,9 @@
-```yaml
+---
 layout: post
 title: On suburbs (and LARPing)
 excerpt: Is there a limit to the larp? Maybe.
-```
+
+---
 
 Metropolitan areas. Places where people gather to live, work, and play.
 
