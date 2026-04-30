@@ -2,12 +2,15 @@
 layout: post
 title: On liminal spaces (and brutalism)
 excerpt: And why you should love them too
+
 ---
+
 A liminal space is a beautiful thing. 
 
 A space not meant to be inhabited, at least not permanently. Something better left as an experience rather than a permanence. 
 
 Notable examples include:
+
 - Airports (most notably for me, the tunnel connected the E and F gates at O’Hare, the tunnels connecting concourses at DFW, and the moving walkways under Dulles)
 - The Crystal City Underground (or what’s left of it)
 - Elevators
