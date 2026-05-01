@@ -120,9 +120,3 @@ Suburbs are a necessary thing, and should be embraced even through their imperfe
 And people who live in their MSA should feel proud of their city - dare I say, even those who live in the larger CSA should be proud of the area they live in. Take pride in the place that lifts you up! And it really *is* no problem if you tell people the city you live in if you live in the suburbs when they ask. As all things in life - approach with humility, candor, and most importantly, humor.
 
 To express your outrage on my viewpoint on this topic, please email [kylenotbrandon@gmail.com](mailto:kylenotbrandon@gmail.com). I'll make sure to get back to you.
-
-
-
-
-
-
