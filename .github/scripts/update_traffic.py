@@ -34,6 +34,7 @@ def fetch_views(repo: str, token: str) -> dict:
             "Authorization": f"Bearer {token}",
             "Accept": "application/vnd.github+json",
             "X-GitHub-Api-Version": "2022-11-28",
+            "User-Agent": "kylenotbrandon.github.io-traffic-workflow",
         },
     )
     with urlopen(req, timeout=60) as resp:
@@ -41,16 +42,24 @@ def fetch_views(repo: str, token: str) -> dict:
 
 
 def main() -> int:
-    token = os.environ.get("GITHUB_TOKEN")
+    # Traffic endpoints often return 403 for GITHUB_TOKEN; use a PAT in secret TRAFFIC_STATS_TOKEN
+    # (fine-grained: Contents read on this repo; classic: repo scope) — see workflow comment.
+    token = os.environ.get("TRAFFIC_STATS_TOKEN") or os.environ.get("GITHUB_TOKEN")
     repo = os.environ.get("GITHUB_REPOSITORY")
     if not token or not repo:
-        print("GITHUB_TOKEN and GITHUB_REPOSITORY are required", file=sys.stderr)
+        print("GITHUB_REPOSITORY and TRAFFIC_STATS_TOKEN or GITHUB_TOKEN are required", file=sys.stderr)
         return 1
 
     try:
         payload = fetch_views(repo, token)
     except HTTPError as e:
         print(f"Traffic API HTTP error: {e.code} {e.reason}", file=sys.stderr)
+        if e.code == 403 and not os.environ.get("TRAFFIC_STATS_TOKEN"):
+            print(
+                "Hint: add repository secret TRAFFIC_STATS_TOKEN (PAT with access to this repo). "
+                "The built-in GITHUB_TOKEN is often rejected for /traffic/* APIs.",
+                file=sys.stderr,
+            )
         return 1
     except URLError as e:
         print(f"Traffic API network error: {e}", file=sys.stderr)

@@ -10,6 +10,9 @@ on:
 permissions:
   contents: write
 
+# The Traffic API frequently returns 403 for secrets.GITHUB_TOKEN. Add a repo secret
+# TRAFFIC_STATS_TOKEN: fine-grained PAT with Contents: Read on this repo (or classic PAT with repo).
+
 concurrency:
   group: traffic-stats
   cancel-in-progress: true
@@ -26,6 +29,7 @@ jobs:
       - name: Refresh traffic data files
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TRAFFIC_STATS_TOKEN: ${{ secrets.TRAFFIC_STATS_TOKEN }}
         run: python3 .github/scripts/update_traffic.py
 
       - name: Commit and push if changed
