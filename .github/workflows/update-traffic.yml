@@ -1,0 +1,42 @@
+# Merge GitHub “Traffic” page views (includes github.com repo views and GitHub Pages) into _data files.
+name: Update traffic stats
+
+on:
+  schedule:
+    # Daily ~06:15 UTC (after GitHub’s traffic rollup)
+    - cron: "15 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: traffic-stats
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Refresh traffic data files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 .github/scripts/update_traffic.py
+
+      - name: Commit and push if changed
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _data/traffic_history.json _data/traffic_stats.yml
+          if git diff --staged --quiet; then
+            echo "No traffic data changes."
+            exit 0
+          fi
+          git commit -m "chore: update traffic stats from GitHub API"
+          git push

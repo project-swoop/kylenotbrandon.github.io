@@ -51,8 +51,9 @@
       </div>
     </main>
     <footer class="win-statusbar" role="contentinfo">
+      {% assign traffic = site.data.traffic_stats %}
       <div class="inner win-status-inner">
-        <span class="win-status-left">Ready</span>
+        <span class="win-status-left">Ready.{% if traffic %}<span class="win-status-hits" title="Daily totals from GitHub repository Traffic (includes this site on GitHub Pages). Updated by a scheduled workflow."> · Page views: {{ traffic.all_time_views }} all-time · {{ traffic.last_7_days_views }} last 7 days</span>{% endif %}</span>
         <span class="win-status-right">&copy; {{ site.time | date: '%Y' }} · <a href="https://pages.github.com/">GitHub Pages</a></span>
       </div>
     </footer>

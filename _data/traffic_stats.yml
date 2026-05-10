@@ -1,0 +1,5 @@
+# Populated by .github/workflows/update-traffic.yml (GitHub Traffic API + rolling daily history).
+# Until the workflow runs at least once, counts stay at zero.
+all_time_views: 0
+last_7_days_views: 0
+last_updated: null
