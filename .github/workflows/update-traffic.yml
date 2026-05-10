@@ -10,9 +10,9 @@ on:
 permissions:
   contents: write
 
-# Traffic API requires push/write access; secrets.GITHUB_TOKEN often gets 403. Add repo secret
-# TRAFFIC_STATS_TOKEN: fine-grained PAT with Contents Read and write on this repo; classic PAT: repo scope.
-# If the org uses SAML, authorize the PAT for the org (token “Configure SSO” / org approval).
+# /traffic/* is gated by Administration (not Contents). secrets.GITHUB_TOKEN can't access it.
+# Add repo secret TRAFFIC_STATS_TOKEN: fine-grained PAT with Administration: Read on this repo
+# (classic PAT: repo scope). Org with SAML: authorize the PAT for the org.
 
 concurrency:
   group: traffic-stats
@@ -25,6 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Refresh traffic data files
@@ -44,4 +45,14 @@ jobs:
             exit 0
           fi
           git commit -m "chore: update traffic stats from GitHub API"
-          git push
+          # Race-safe push: rebase onto the current remote tip and retry a few times.
+          for i in 1 2 3 4 5; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push rejected (attempt $i); rebasing onto origin/main and retrying..."
+            git fetch origin main
+            git pull --rebase origin main
+          done
+          echo "Failed to push after retries." >&2
+          exit 1

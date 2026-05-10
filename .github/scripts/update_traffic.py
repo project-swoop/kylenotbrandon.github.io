@@ -70,10 +70,9 @@ def main() -> int:
             print(f"GitHub API: {detail}", file=sys.stderr)
         if e.code == 403:
             print(
-                "Hints: GitHub only exposes /traffic/* if the token has push/write access to this repo. "
-                "Fine-grained PAT: Repository contents → Read and write (Read alone is not enough). "
-                "For orgs with SAML/SSO, authorize the PAT for the organization. "
-                "Classic PAT: repo scope. If you only set TRAFFIC_STATS_TOKEN to read-only, recreate it with write.",
+                "Hint: /traffic/* requires the fine-grained PAT permission "
+                "Repository permissions → Administration: Read (not Contents). "
+                "Classic PAT: repo scope. Org with SAML: authorize the PAT for the org.",
                 file=sys.stderr,
             )
         return 1
