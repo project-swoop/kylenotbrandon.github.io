@@ -10,8 +10,9 @@ on:
 permissions:
   contents: write
 
-# The Traffic API frequently returns 403 for secrets.GITHUB_TOKEN. Add a repo secret
-# TRAFFIC_STATS_TOKEN: fine-grained PAT with Contents: Read on this repo (or classic PAT with repo).
+# Traffic API requires push/write access; secrets.GITHUB_TOKEN often gets 403. Add repo secret
+# TRAFFIC_STATS_TOKEN: fine-grained PAT with Contents Read and write on this repo; classic PAT: repo scope.
+# If the org uses SAML, authorize the PAT for the org (token “Configure SSO” / org approval).
 
 concurrency:
   group: traffic-stats

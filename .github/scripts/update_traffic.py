@@ -26,6 +26,18 @@ def load_history() -> dict:
     return data
 
 
+def _http_error_detail(exc: HTTPError) -> str:
+    try:
+        raw = exc.read().decode("utf-8", errors="replace")
+        data = json.loads(raw)
+        msg = data.get("message")
+        if isinstance(msg, str) and msg.strip():
+            return msg.strip()
+    except Exception:
+        pass
+    return ""
+
+
 def fetch_views(repo: str, token: str) -> dict:
     url = f"https://api.github.com/repos/{repo}/traffic/views"
     req = Request(
@@ -42,8 +54,7 @@ def fetch_views(repo: str, token: str) -> dict:
 
 
 def main() -> int:
-    # Traffic endpoints often return 403 for GITHUB_TOKEN; use a PAT in secret TRAFFIC_STATS_TOKEN
-    # (fine-grained: Contents read on this repo; classic: repo scope) — see workflow comment.
+    # Traffic API requires write/push access (docs). Use TRAFFIC_STATS_TOKEN when GITHUB_TOKEN gets 403.
     token = os.environ.get("TRAFFIC_STATS_TOKEN") or os.environ.get("GITHUB_TOKEN")
     repo = os.environ.get("GITHUB_REPOSITORY")
     if not token or not repo:
@@ -53,11 +64,16 @@ def main() -> int:
     try:
         payload = fetch_views(repo, token)
     except HTTPError as e:
+        detail = _http_error_detail(e)
         print(f"Traffic API HTTP error: {e.code} {e.reason}", file=sys.stderr)
-        if e.code == 403 and not os.environ.get("TRAFFIC_STATS_TOKEN"):
+        if detail:
+            print(f"GitHub API: {detail}", file=sys.stderr)
+        if e.code == 403:
             print(
-                "Hint: add repository secret TRAFFIC_STATS_TOKEN (PAT with access to this repo). "
-                "The built-in GITHUB_TOKEN is often rejected for /traffic/* APIs.",
+                "Hints: GitHub only exposes /traffic/* if the token has push/write access to this repo. "
+                "Fine-grained PAT: Repository contents → Read and write (Read alone is not enough). "
+                "For orgs with SAML/SSO, authorize the PAT for the organization. "
+                "Classic PAT: repo scope. If you only set TRAFFIC_STATS_TOKEN to read-only, recreate it with write.",
                 file=sys.stderr,
             )
         return 1
