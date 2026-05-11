@@ -454,6 +454,12 @@ input[type="text"] {
   white-space: nowrap;
 }
 
+/* display:flex above beats the UA [hidden] stylesheet — same idea as .start-menu[hidden] */
+.archive-item[hidden],
+.year-block[hidden] {
+  display: none !important;
+}
+
 .post-header {
   margin-bottom: 16px;
   padding-bottom: 10px;
