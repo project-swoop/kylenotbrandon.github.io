@@ -15,6 +15,7 @@ While Nintendo does other stuff like Mii-based games and is a peddler of titles 
 - Pikmin
 
 These series are recognizable for their bright, colorful, polished graphics – and they’re all stunning. Breath of the Wild was incredible even on the lower-powered hardware of the Switch 1. Yet with one notable surprise as of late, maybe they’re trying to change their image in an attempt to make it a Big 6…
+
 ## Enter Star Fox
 
 Maybe this was a bit of a coincidence in timing rather than a purely strategic decision, but in *The Super Mario Galaxy Movie*, hardcore Nintendo fans (which admittedly I am not one of) were surprised to see a familiar face appear in Fox McCloud, from the mildly popular game series *Star Fox*. Now I asked Google to summarize the series in one sentence and got this:
@@ -75,5 +76,3 @@ And Slippy Toad doesn’t know how to register to vote. Bro spends all day on hi
 ## In conclusion
 
 I think writing this blog has taught me that my best work does not come after a couple drinks. But in summary, I’m excited to see Nintendo go a new direction with something that’s not exactly adult by nature or violent but darker, more detailed, and a little more heavy than another shiny, ultrapolished Nintendo staple. I’m hoping this can unlock a bigger audience for more new games to come. And maybe I will buy that Switch 2.
-
-
