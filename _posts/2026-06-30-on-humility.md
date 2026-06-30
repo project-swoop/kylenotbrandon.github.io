@@ -1,8 +1,8 @@
-```yaml
+---
 layout: post
 title: On humility
 excerpt: Is common decency a common virtue?
-```
+---
 
 Well, hey guys! It's been a minute, and I owe you an explanation as to where I've been. Given that most (well, probably all) of the readers of this blog know me IRL, I feel like you guys know where I've been. But in the hopes that there's someone out there that came across this page naturally and started reading, I'll explain.
 
