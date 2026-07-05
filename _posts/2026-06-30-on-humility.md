@@ -117,5 +117,3 @@ Question 10 - No. Nope. Those people know what they're doing. They exist to piss
 All in all, by the B.U.L.L.S.H.I.T metric, looks like I'm 70% humble. Could be worse. 
 
 Thanks for reading through this one! It's good to be back. Feel free to send me your B.U.L.L.S.H.I.T scores at [kylenotbrandon@gmail.com](mailto:kylenotbrandon@gmail.com). At the very least, feel free to send me hatred on how flawed this metric is. Trust me, I'm aware of it. :) 
-
-
