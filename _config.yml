@@ -5,7 +5,7 @@ permalink: /blog/:year/:month/:day/:title/
 
 # Apps Script web app URL (Deploy → Web app → ends with /exec). See docs/newsletter-setup.md.
 newsletter:
-  apps_script_url: "https://script.google.com/macros/s/REPLACE_ME/exec"
+  apps_script_url: "https://script.google.com/macros/s/AKfycbwWbn0zTTb0cdbeIxnV_D7Uz-e3dCnSJiwq6B1fI2Zn0XYbKDdf5UymrEQxpwC19k6ccw/exec"
 
 plugins:
   - jekyll-paginate
