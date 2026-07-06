@@ -46,10 +46,6 @@ query Rollup($zoneTag: string, $filter: ZoneHttpRequestsAdaptiveGroupsFilter_Inp
   viewer {
     zones(filter: { zoneTag: $zoneTag }) {
       httpRequestsAdaptiveGroups(limit: 1, filter: $filter) {
-        sum {
-          pageViews
-          requests
-        }
         uniq {
           uniques
         }
