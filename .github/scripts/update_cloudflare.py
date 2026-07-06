@@ -29,8 +29,8 @@ query DailyVisits($zoneTag: string, $since: Date!, $until: Date!) {
           date
         }
         sum {
-          visits
           pageViews
+          requests
         }
         uniq {
           uniques
@@ -47,8 +47,8 @@ query Rollup($zoneTag: string, $filter: ZoneHttpRequestsAdaptiveGroupsFilter_Inp
     zones(filter: { zoneTag: $zoneTag }) {
       httpRequestsAdaptiveGroups(limit: 1, filter: $filter) {
         sum {
-          visits
           pageViews
+          requests
         }
         uniq {
           uniques
@@ -141,19 +141,19 @@ def main() -> int:
         total = row.get("sum") or {}
         uniq = row.get("uniq") or {}
         days[day] = {
-            "visits": int(total.get("visits") or 0),
             "page_views": int(total.get("pageViews") or 0),
+            "requests": int(total.get("requests") or 0),
             "uniques": int(uniq.get("uniques") or 0),
         }
 
     hist["days"] = days
     hist["last_sync"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    all_time_visits = sum(day.get("visits", 0) for day in days.values())
+    all_time_page_views = sum(day.get("page_views", 0) for day in days.values())
 
     week_start = today - timedelta(days=6)
-    week_visits = sum(
-        days.get(d.isoformat(), {}).get("visits", 0)
+    week_page_views = sum(
+        days.get(d.isoformat(), {}).get("page_views", 0)
         for d in (week_start + timedelta(days=i) for i in range(7))
     )
 
@@ -190,19 +190,19 @@ def main() -> int:
 
     updated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     stats_body = f"""# Auto-updated by .github/workflows/update-traffic.yml (Cloudflare GraphQL)
-# all_time_visits sums daily visit totals recorded since this workflow was enabled.
+# all_time_page_views sums daily page-view totals recorded since this workflow was enabled.
 # last_7_days_visitors is deduplicated unique visitors across the rolling 7-day window.
-all_time_visits: {all_time_visits}
+all_time_page_views: {all_time_page_views}
 last_7_days_visitors: {week_uniques}
-last_7_days_visits: {week_visits}
+last_7_days_page_views: {week_page_views}
 last_updated: "{updated}"
 """
     with open(STATS_PATH, "w", encoding="utf-8") as f:
         f.write(stats_body)
 
     print(
-        f"all_time_visits={all_time_visits} "
-        f"last_7_days_visitors={week_uniques} last_7_days_visits={week_visits}"
+        f"all_time_page_views={all_time_page_views} "
+        f"last_7_days_visitors={week_uniques} last_7_days_page_views={week_page_views}"
     )
     return 0
 

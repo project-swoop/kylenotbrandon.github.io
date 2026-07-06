@@ -53,7 +53,7 @@
     <footer class="win-statusbar" role="contentinfo">
       {% assign cf = site.data.cloudflare_stats %}
       <div class="inner win-status-inner">
-        <span class="win-status-left">Ready.{% if cf.last_updated and cf.last_updated != "" %}<span class="win-status-hits" title="Visitor totals from Cloudflare (proxied traffic). Updated daily by a scheduled workflow."> · Visitors: {{ cf.all_time_visits }} visits all-time · {{ cf.last_7_days_visitors }} unique last 7 days</span>{% endif %}</span>
+        <span class="win-status-left">Ready.{% if cf.last_updated and cf.last_updated != "" %}<span class="win-status-hits" title="Visitor totals from Cloudflare (proxied traffic). Updated daily by a scheduled workflow."> · Visitors: {{ cf.all_time_page_views }} page views all-time · {{ cf.last_7_days_visitors }} unique last 7 days</span>{% endif %}</span>
         <span class="win-status-right">&copy; {{ site.time | date: '%Y' }} · <a href="https://pages.github.com/">GitHub Pages</a></span>
       </div>
     </footer>
