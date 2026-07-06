@@ -16,6 +16,7 @@ HISTORY_PATH = ROOT / "_data" / "cloudflare_history.json"
 STATS_PATH = ROOT / "_data" / "cloudflare_stats.yml"
 GRAPHQL_URL = "https://api.cloudflare.com/client/v4/graphql"
 
+# httpRequests1dGroups is the stable zone analytics dataset for daily totals.
 DAILY_QUERY = """
 query DailyVisits($zoneTag: string, $since: Date!, $until: Date!) {
   viewer {
@@ -32,20 +33,6 @@ query DailyVisits($zoneTag: string, $since: Date!, $until: Date!) {
           pageViews
           requests
         }
-        uniq {
-          uniques
-        }
-      }
-    }
-  }
-}
-"""
-
-ROLLUP_QUERY = """
-query Rollup($zoneTag: string, $filter: ZoneHttpRequestsAdaptiveGroupsFilter_InputObject) {
-  viewer {
-    zones(filter: { zoneTag: $zoneTag }) {
-      httpRequestsAdaptiveGroups(limit: 1, filter: $filter) {
         uniq {
           uniques
         }
@@ -94,6 +81,11 @@ def zone_groups(data: dict, field: str) -> list:
         return []
     groups = zones[0].get(field) or []
     return groups if isinstance(groups, list) else []
+
+
+def week_dates(end: datetime.date) -> list[str]:
+    start = end - timedelta(days=6)
+    return [(start + timedelta(days=i)).isoformat() for i in range(7)]
 
 
 def main() -> int:
@@ -147,37 +139,10 @@ def main() -> int:
 
     all_time_page_views = sum(day.get("page_views", 0) for day in days.values())
 
-    week_start = today - timedelta(days=6)
-    week_page_views = sum(
-        days.get(d.isoformat(), {}).get("page_views", 0)
-        for d in (week_start + timedelta(days=i) for i in range(7))
-    )
-
-    rollup_start = datetime.combine(week_start, datetime.min.time(), tzinfo=timezone.utc)
-    rollup_end = datetime.combine(today + timedelta(days=1), datetime.min.time(), tzinfo=timezone.utc)
-    try:
-        rollup_data = graphql(
-            token,
-            ROLLUP_QUERY,
-            {
-                "zoneTag": zone_id,
-                "filter": {
-                    "datetime_geq": rollup_start.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                    "datetime_lt": rollup_end.strftime("%Y-%m-%dT%H:%M:%SZ"),
-                    "requestSource": "eyeball",
-                },
-            },
-        )
-    except HTTPError as e:
-        print(f"Cloudflare rollup HTTP error: {e.code} {e.reason}", file=sys.stderr)
-        return 1
-    except (URLError, RuntimeError) as e:
-        print(f"Cloudflare rollup error: {e}", file=sys.stderr)
-        return 1
-
-    rollup_rows = zone_groups(rollup_data, "httpRequestsAdaptiveGroups")
-    rollup = rollup_rows[0] if rollup_rows else {}
-    week_uniques = int((rollup.get("uniq") or {}).get("uniques") or 0)
+    rolling_week = week_dates(today)
+    week_page_views = sum(days.get(day, {}).get("page_views", 0) for day in rolling_week)
+    # Sum of daily uniques slightly overcounts vs. dashboard 7-day dedupe, but uses one stable API.
+    week_uniques = sum(days.get(day, {}).get("uniques", 0) for day in rolling_week)
 
     STATS_PATH.parent.mkdir(parents=True, exist_ok=True)
     with open(HISTORY_PATH, "w", encoding="utf-8") as f:
@@ -187,7 +152,7 @@ def main() -> int:
     updated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     stats_body = f"""# Auto-updated by .github/workflows/update-traffic.yml (Cloudflare GraphQL)
 # all_time_page_views sums daily page-view totals recorded since this workflow was enabled.
-# last_7_days_visitors is deduplicated unique visitors across the rolling 7-day window.
+# last_7_days_visitors sums daily unique-visitor counts for the rolling 7-day window.
 all_time_page_views: {all_time_page_views}
 last_7_days_visitors: {week_uniques}
 last_7_days_page_views: {week_page_views}
