@@ -3,6 +3,10 @@ description: "can you believe this was $3 for a whole year of fun?."
 url: "https://kylenotbrandon.blog"
 permalink: /blog/:year/:month/:day/:title/
 
+# Apps Script web app URL (Deploy → Web app → ends with /exec). See docs/newsletter-setup.md.
+newsletter:
+  apps_script_url: "https://script.google.com/macros/s/REPLACE_ME/exec"
+
 plugins:
   - jekyll-paginate
   - jekyll-feed
@@ -15,6 +19,7 @@ highlighter: rouge
 
 exclude:
   - .github
+  - docs
   - Gemfile
   - Gemfile.lock
   - README.md

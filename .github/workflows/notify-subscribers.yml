@@ -1,0 +1,42 @@
+# After a successful Pages deploy, email subscribers when new posts were added.
+name: Notify newsletter subscribers
+
+on:
+  workflow_run:
+    workflows: ["Deploy Jekyll site to Pages"]
+    types: [completed]
+    branches: [main, master]
+  workflow_dispatch:
+    inputs:
+      force_latest:
+        description: Send announcement for the newest post (test mode)
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: newsletter-notify
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          fetch-depth: 2
+
+      - name: Notify subscribers
+        env:
+          NEWSLETTER_WEBHOOK_URL: ${{ secrets.NEWSLETTER_WEBHOOK_URL }}
+          NEWSLETTER_WEBHOOK_SECRET: ${{ secrets.NEWSLETTER_WEBHOOK_SECRET }}
+          SITE_URL: https://kylenotbrandon.blog
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          NOTIFY_FORCE_LATEST: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.force_latest == 'true' && '1' || '' }}
+        run: python3 .github/scripts/notify_subscribers.py
