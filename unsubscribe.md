@@ -6,11 +6,11 @@ permalink: /unsubscribe/
 
 {% assign newsletter_url = site.newsletter.apps_script_url %}
 
-<div id="unsubscribe-working" class="newsletter-panel" hidden>
+<div id="unsubscribe-working" class="newsletter-panel newsletter-is-hidden">
   <p>Unsubscribing…</p>
 </div>
 
-<div id="unsubscribe-success" class="newsletter-panel newsletter-success" hidden>
+<div id="unsubscribe-success" class="newsletter-panel newsletter-success newsletter-is-hidden">
   <p><strong>You have been unsubscribed</strong>; you will not receive further emails. Sorry to see you go, but grateful for your support!</p>
   <p><a href="{{ '/' | relative_url }}">Back to the blog</a></p>
 </div>
@@ -33,8 +33,17 @@ permalink: /unsubscribe/
   var working = document.getElementById('unsubscribe-working');
   var success = document.getElementById('unsubscribe-success');
   var help = document.getElementById('unsubscribe-help');
-  if (working) working.hidden = false;
-  if (help) help.hidden = true;
+
+  function showNode(el) {
+    if (el) el.classList.remove('newsletter-is-hidden');
+  }
+
+  function hideNode(el) {
+    if (el) el.classList.add('newsletter-is-hidden');
+  }
+
+  showNode(working);
+  hideNode(help);
 
   var request = fetch(
     apiUrl + '?action=unsubscribe&token=' + encodeURIComponent(token),
@@ -42,8 +51,8 @@ permalink: /unsubscribe/
   );
 
   Promise.resolve(request).finally(function () {
-    if (working) working.hidden = true;
-    if (success) success.hidden = false;
+    hideNode(working);
+    showNode(success);
   });
 })();
 </script>

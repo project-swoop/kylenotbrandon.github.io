@@ -12,11 +12,11 @@ Get an email every time I publish a new post. Nothing needed but your email. And
 {% if newsletter_url == "" or newsletter_url contains "REPLACE_ME" %}
 <p class="newsletter-notice"><strong>Newsletter signup is not configured yet.</strong> See <code>docs/newsletter-setup.md</code> in the repo.</p>
 {% else %}
-<div id="newsletter-success" class="newsletter-panel newsletter-success" hidden>
+<div id="newsletter-success" class="newsletter-panel newsletter-success newsletter-is-hidden">
   <p><strong>You are subscribed!</strong> You will get an email when any future posts go live. Thank you so much for supporting the blog! (As a fair warning, any emails <em>could</em> end up in your spam/junk folder.)</p>
 </div>
 
-<div id="newsletter-error" class="newsletter-panel newsletter-error" hidden>
+<div id="newsletter-error" class="newsletter-panel newsletter-error newsletter-is-hidden">
   <p><strong>Something went wrong.</strong> Please try again in a moment.</p>
 </div>
 
@@ -42,20 +42,28 @@ Get an email every time I publish a new post. Nothing needed but your email. And
   var error = document.getElementById('newsletter-error');
   if (!form || !frame) return;
 
+  function showNode(el) {
+    if (el) el.classList.remove('newsletter-is-hidden');
+  }
+
+  function hideNode(el) {
+    if (el) el.classList.add('newsletter-is-hidden');
+  }
+
   function showSuccess() {
-    if (success) success.hidden = false;
-    if (error) error.hidden = true;
-    form.hidden = true;
+    showNode(success);
+    hideNode(error);
+    hideNode(form);
   }
 
   function showError() {
-    if (error) error.hidden = false;
+    showNode(error);
     if (submitBtn) submitBtn.disabled = false;
   }
 
   form.addEventListener('submit', function () {
     if (submitBtn) submitBtn.disabled = true;
-    if (error) error.hidden = true;
+    hideNode(error);
 
     var timedOut = false;
     var timeout = window.setTimeout(function () {

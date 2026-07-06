@@ -773,6 +773,14 @@ input[type="text"] {
   max-width: 28rem;
 }
 
+.newsletter-is-hidden {
+  display: none !important;
+}
+
+#newsletter-form.newsletter-is-hidden {
+  display: none !important;
+}
+
 .newsletter-success {
   border-color: #fff #404040 #404040 #fff;
 }
