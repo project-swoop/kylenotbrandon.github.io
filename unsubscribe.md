@@ -51,4 +51,4 @@ permalink: /unsubscribe/
 <noscript>
   <p class="newsletter-notice">JavaScript is required to unsubscribe on this page. Use the unsubscribe link in your email client, or email me directly.</p>
 </noscript>
-{% endif %}
+{% endunless %}
