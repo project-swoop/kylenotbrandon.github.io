@@ -1,0 +1,5 @@
+# Populated by .github/workflows/update-traffic.yml once CLOUDFLARE_API_TOKEN and CLOUDFLARE_ZONE_ID are set.
+all_time_visits: 0
+last_7_days_visitors: 0
+last_7_days_visits: 0
+last_updated: ""
