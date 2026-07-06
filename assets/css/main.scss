@@ -777,6 +777,20 @@ input[type="text"] {
   border-color: #fff #404040 #404040 #fff;
 }
 
+.newsletter-error {
+  border-color: #404040 #fff #fff #404040;
+  color: #800000;
+}
+
+.newsletter-hidden-frame {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 0;
+  visibility: hidden;
+  overflow: hidden;
+}
+
 .newsletter-notice {
   padding: 10px 12px;
   border: 2px groove var(--face);

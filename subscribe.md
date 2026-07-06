@@ -17,25 +17,59 @@ Get an email when I publish a new post. No account needed — just your address.
   <p><strong>You are subscribed.</strong> You will get an email when the next post goes live.</p>
 </div>
 
-<form class="newsletter-form" action="{{ newsletter_url }}" method="post">
+<div id="newsletter-error" class="newsletter-panel newsletter-error" hidden>
+  <p><strong>Something went wrong.</strong> Please try again in a moment.</p>
+</div>
+
+<form id="newsletter-form" class="newsletter-form" action="{{ newsletter_url }}" method="post" target="newsletter-frame" data-api-url="{{ newsletter_url }}">
   <input type="hidden" name="action" value="subscribe">
   <div class="newsletter-field">
     <label for="newsletter-email">Email address</label>
     <input id="newsletter-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com">
   </div>
-  <button type="submit" class="newsletter-button">Subscribe</button>
+  <button id="newsletter-submit" type="submit" class="newsletter-button">Subscribe</button>
 </form>
+
+<iframe id="newsletter-frame" class="newsletter-hidden-frame" name="newsletter-frame" title="Newsletter signup" tabindex="-1"></iframe>
 
 <p class="newsletter-fine-print">One email per new post. Every message includes a one-click unsubscribe link.</p>
 
 <script>
 (function () {
-  var params = new URLSearchParams(window.location.search);
-  if (params.get('done') !== '1') return;
-  var panel = document.getElementById('newsletter-success');
-  var form = document.querySelector('.newsletter-form');
-  if (panel) panel.hidden = false;
-  if (form) form.hidden = true;
+  var form = document.getElementById('newsletter-form');
+  var frame = document.getElementById('newsletter-frame');
+  var submitBtn = document.getElementById('newsletter-submit');
+  var success = document.getElementById('newsletter-success');
+  var error = document.getElementById('newsletter-error');
+  if (!form || !frame) return;
+
+  function showSuccess() {
+    if (success) success.hidden = false;
+    if (error) error.hidden = true;
+    form.hidden = true;
+  }
+
+  function showError() {
+    if (error) error.hidden = false;
+    if (submitBtn) submitBtn.disabled = false;
+  }
+
+  form.addEventListener('submit', function () {
+    if (submitBtn) submitBtn.disabled = true;
+    if (error) error.hidden = true;
+
+    var timedOut = false;
+    var timeout = window.setTimeout(function () {
+      timedOut = true;
+      showError();
+    }, 15000);
+
+    frame.onload = function () {
+      window.clearTimeout(timeout);
+      if (!timedOut) showSuccess();
+      frame.onload = null;
+    };
+  });
 })();
 </script>
 {% endif %}

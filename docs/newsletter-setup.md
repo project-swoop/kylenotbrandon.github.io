@@ -35,7 +35,6 @@ Email subscribers when you publish a new post. The blog sends themed HTML mail a
 | `TEMPLATE_URL` | `https://raw.githubusercontent.com/project-swoop/kylenotbrandon.github.io/main/email/new-post.html` |
 | `SITE_URL` | `https://kylenotbrandon.blog` |
 | `SITE_TITLE` | `kyle speaks on...` |
-| `SUBSCRIBE_REDIRECT` | `https://kylenotbrandon.blog/subscribe/?done=1` |
 | `FROM_NAME` | `kyle speaks on...` |
 
 ### 3. Deploy the web app
@@ -62,10 +61,10 @@ In the repo: **Settings → Secrets and variables → Actions → New repository
 
 ## Test it
 
-1. Visit [kylenotbrandon.blog/subscribe/](https://kylenotbrandon.blog/subscribe/) and sign up with your email.
+1. Visit [kylenotbrandon.blog/subscribe/](https://kylenotbrandon.blog/subscribe/) and sign up with your email — you should see confirmation on the same page (no redirect to Google).
 2. Confirm the row appears in the **subscribers** sheet.
 3. In GitHub: **Actions → Notify newsletter subscribers → Run workflow**, enable **force_latest**, run.
-4. Check your inbox for the themed email.
+4. Check your inbox for the themed email — the footer **Unsubscribe** link should stay on `kylenotbrandon.blog`.
 5. Click **Unsubscribe** and confirm the `active` column becomes `FALSE`.
 
 ## How publishing works
@@ -90,7 +89,7 @@ After you change the template, push to `main`. The next send fetches the updated
 - **Gmail** (via Apps Script) allows about **500 emails/day** — plenty for a personal blog.
 - The first time you send, Google may show a security review screen; approve it for your account.
 - If secrets are missing, the notify workflow skips quietly (deploy still succeeds).
-- Unsubscribe links go to your Apps Script web app with a unique token per subscriber. Gmail and Apple Mail also show a one-click **Unsubscribe** button via `List-Unsubscribe` headers.
+- Unsubscribe links in emails point to `kylenotbrandon.blog/unsubscribe/?t=…` so readers never land on `scripts.google.com`. Gmail’s one-click header still uses the Apps Script URL directly (invisible to most readers).
 
 ## Troubleshooting
 

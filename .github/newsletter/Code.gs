@@ -11,7 +11,7 @@
  *   WEB_APP_URL        — deployed web app URL (ends with /exec)
  *   SITE_URL           — https://kylenotbrandon.blog
  *   SITE_TITLE         — kyle speaks on...
- *   SUBSCRIBE_REDIRECT — https://kylenotbrandon.blog/subscribe/?done=1
+ *   SUBSCRIBE_REDIRECT — optional legacy; subscribe stays on the blog now
  *   FROM_NAME          — kyle speaks on...
  */
 
@@ -101,9 +101,7 @@ function doPost(e) {
 function handleSubscribe(email) {
   email = normalizeEmail(email);
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return HtmlService.createHtmlOutput(
-      wrapPage('Subscribe', '<p>Please enter a valid email address and try again.</p>')
-    );
+    return HtmlService.createHtmlOutput('<!DOCTYPE html><html><body>invalid</body></html>');
   }
 
   var sheet = getSheet();
@@ -114,27 +112,21 @@ function handleSubscribe(email) {
       continue;
     }
     if (isActive(data[i][3])) {
-      return redirectSubscribeSuccess();
+      return subscribeAck();
     }
     var token = data[i][1] || generateToken();
     sheet.getRange(i + 1, 2).setValue(token);
     sheet.getRange(i + 1, 3).setValue(new Date().toISOString());
     sheet.getRange(i + 1, 4).setValue(true);
-    return redirectSubscribeSuccess();
+    return subscribeAck();
   }
 
   sheet.appendRow([email, generateToken(), new Date().toISOString(), true]);
-  return redirectSubscribeSuccess();
+  return subscribeAck();
 }
 
-function redirectSubscribeSuccess() {
-  var cfg = getConfig();
-  var url = cfg.subscribeRedirect;
-  return HtmlService.createHtmlOutput(
-    '<!DOCTYPE html><html><head><meta charset="utf-8">' +
-      '<meta http-equiv="refresh" content="0;url=' + escapeHtml(url) + '">' +
-      '</head><body><p>Redirecting…</p><p><a href="' + escapeHtml(url) + '">Continue</a></p></body></html>'
-  );
+function subscribeAck() {
+  return HtmlService.createHtmlOutput('<!DOCTYPE html><html><body>ok</body></html>');
 }
 
 function handleUnsubscribe(token) {
@@ -201,8 +193,16 @@ function fetchTemplate(templateUrl) {
   return response.getContentText();
 }
 
+function unsubscribePageUrl(token, cfg) {
+  return cfg.siteUrl + '/unsubscribe/?t=' + encodeURIComponent(token);
+}
+
+function unsubscribeApiUrl(token, cfg) {
+  return cfg.webAppUrl + '?action=unsubscribe&token=' + encodeURIComponent(token);
+}
+
 function renderTemplate(template, post, subscriber, cfg) {
-  var unsubUrl = cfg.webAppUrl + '?action=unsubscribe&token=' + encodeURIComponent(subscriber.token);
+  var unsubUrl = unsubscribePageUrl(subscriber.token, cfg);
   return template
     .replace(/\{\{SITE_TITLE\}\}/g, escapeHtml(cfg.siteTitle))
     .replace(/\{\{SITE_URL\}\}/g, escapeHtml(cfg.siteUrl))
@@ -242,12 +242,12 @@ function handleSend(payload) {
   for (var i = 0; i < subscribers.length; i++) {
     var sub = subscribers[i];
     var html = renderTemplate(template, post, sub, cfg);
-    var unsubUrl = cfg.webAppUrl + '?action=unsubscribe&token=' + encodeURIComponent(sub.token);
+    var oneClickUnsubUrl = unsubscribeApiUrl(sub.token, cfg);
     GmailApp.sendEmail(sub.email, 'New post: ' + post.title, plainTextFallback(post), {
       htmlBody: html,
       name: cfg.fromName,
       headers: {
-        'List-Unsubscribe': '<' + unsubUrl + '>',
+        'List-Unsubscribe': '<' + oneClickUnsubUrl + '>',
         'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
       },
     });
