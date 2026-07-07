@@ -532,6 +532,14 @@ input[type="text"] {
   margin: 1.25em 0;
 }
 
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+  border: 1px solid var(--border-3d-mid);
+}
+
 /* —— Windows XP taskbar + Start menu —— */
 .start-menu[hidden] {
   display: none !important;

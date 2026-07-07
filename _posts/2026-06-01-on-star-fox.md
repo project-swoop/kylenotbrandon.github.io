@@ -24,7 +24,7 @@ Maybe this was a bit of a coincidence in timing rather than a purely strategic d
 
 Pretty spot on.
 
-[Fox McCloud in the Super Mario Galaxy Movie](https://kylenotbrandon.blog/assets/img/IMG_0262.PNG)
+![Fox McCloud in the Super Mario Galaxy Movie](/assets/img/IMG_0262.PNG)
 
 Now I haven’t watched the movie, but his cameo was brief and his character, voiced by Glen Powell, felt…off. Fox feels too chipper, too animated, and too polished for a guy who’s spent 9 games being a stoic 20-something trying to save the universe almost single-handedly. He’s supposed to be serious and cool and neither of those came through in the movie adaptation, unfortunately. And admittedly, I’ve spent such little time paying attention to this movie that I wasn’t aware of the cameo until well after release. And when I did, I was disappointed that they stripped away the character of the…character (ugh, I know) and was worried for the future of the game series. Until…
 
@@ -35,17 +35,17 @@ Now I haven’t watched the movie, but his cameo was brief and his character, vo
 This is just a brief part of the game’s prologue, but it looks AWESOME. They nailed everything. You don’t need a space war to be polished and shiny. It *should* be brutal and dark and a little moody. Even if it’s fighting with lasers and energy weapons and sci-fi stuff, you can tell these characters aren’t smiling through it all. But there is one thing that stands out to me.  
 
 The characters…
-[Fox and friends](https://kylenotbrandon.blog/assets/img/IMG_0264.PNG)
+![Fox and friends](/assets/img/IMG_0264.PNG)
 
 They look a little weird. There’s a bit of an uncanny valley where you can have some human traits like whites in eyes and human hands and legs and speech patterns, but the designers over at Nintendo seem to have overbaked this a little. The animal legs are one offender, as are the tiny little eyes that I think would look better without the whites. These characters don’t feel expressive or nearly as visually endearing as older versions with bigger eyes and human legs. See 2018’s *Starlink: Battle for Atlas* as an example:
 
-[Fox and friends, 8 years ago](https://kylenotbrandon.blog/assets/img/IMG_0266.JPG)
+![Fox and friends, 8 years ago](/assets/img/IMG_0266.JPG)
 
 See? Personally I wish they had gone for a bit more of that design. While I appreciate and love the realism and I’m imagining they’re getting every bit out of the Switch 2’s (ostensibly limited, I don’t own one) hardware, it’s a bit poorly shod.
 
 Probably the worst offender is Fox’s dad James, who’s shown in the prologue I linked above:
 
-[$50 on pump 8 and a roller dog](https://kylenotbrandon.blog/assets/img/IMG_0265.JPG)
+![$50 on pump 8 and a roller dog](/assets/img/IMG_0265.JPG)
 
 They made him a chud! This man was there on January 6th and he’ll be back for Freedom 250 on the Mall! He has every red hat ever made!
 

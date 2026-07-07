@@ -71,5 +71,3 @@ So on your next run, stick to the right. Leave the Bluetooth speakers at home. A
 (I wish I could go for a run today. But it's July 5th and the largest fireworks show in the world has allegedly produced too many particulates for me to do that safely. Oh well.)
 
 See you next time!
-
-
