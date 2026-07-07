@@ -1,0 +1,75 @@
+{
+  "days": {
+    "2026-06-23": {
+      "page_views": 87,
+      "requests": 1757,
+      "uniques": 123
+    },
+    "2026-06-24": {
+      "page_views": 94,
+      "requests": 2365,
+      "uniques": 106
+    },
+    "2026-06-25": {
+      "page_views": 98,
+      "requests": 1546,
+      "uniques": 101
+    },
+    "2026-06-26": {
+      "page_views": 95,
+      "requests": 1149,
+      "uniques": 162
+    },
+    "2026-06-27": {
+      "page_views": 86,
+      "requests": 1170,
+      "uniques": 92
+    },
+    "2026-06-28": {
+      "page_views": 143,
+      "requests": 2932,
+      "uniques": 178
+    },
+    "2026-06-29": {
+      "page_views": 47,
+      "requests": 552,
+      "uniques": 74
+    },
+    "2026-06-30": {
+      "page_views": 62,
+      "requests": 2431,
+      "uniques": 81
+    },
+    "2026-07-01": {
+      "page_views": 69,
+      "requests": 891,
+      "uniques": 83
+    },
+    "2026-07-02": {
+      "page_views": 138,
+      "requests": 723,
+      "uniques": 145
+    },
+    "2026-07-03": {
+      "page_views": 82,
+      "requests": 1577,
+      "uniques": 148
+    },
+    "2026-07-04": {
+      "page_views": 80,
+      "requests": 917,
+      "uniques": 106
+    },
+    "2026-07-05": {
+      "page_views": 70,
+      "requests": 852,
+      "uniques": 80
+    },
+    "2026-07-06": {
+      "page_views": 54,
+      "requests": 405,
+      "uniques": 61
+    }
+  },
+  "last_sync": "2026-07-06T12:49:27Z"
+}

@@ -19,6 +19,7 @@
         <li><a class="start-menu-item" href="{{ '/' | relative_url }}"><img src="{{ '/assets/img/icon-home.png' | relative_url }}" width="32" height="32" alt="">Home</a></li>
         <li><a class="start-menu-item" href="{{ '/blog/' | relative_url }}"><img src="{{ '/assets/img/icon-blog.png' | relative_url }}" width="32" height="32" alt="">Blog</a></li>
         <li><a class="start-menu-item" href="{{ '/about/' | relative_url }}"><img src="{{ '/assets/img/icon-about.png' | relative_url }}" width="32" height="32" alt="">About</a></li>
+        <li><a class="start-menu-item" href="{{ '/subscribe/' | relative_url }}"><img src="{{ '/assets/img/icon-subscribe.png' | relative_url }}" width="32" height="32" alt="">Subscribe</a></li>
         <li><a class="start-menu-item" href="{{ '/contact/' | relative_url }}"><img src="{{ '/assets/img/icon-contact.png' | relative_url }}" width="32" height="32" alt="">Contact</a></li>
       </ul>
       <div class="start-menu-footer">
@@ -43,6 +44,7 @@
       <a href="{{ '/' | relative_url }}">Home</a>
       <a href="{{ '/blog/' | relative_url }}">Blog</a>
       <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ '/subscribe/' | relative_url }}">Subscribe</a>
       <a href="{{ '/contact/' | relative_url }}">Contact</a>
     </nav>
     <main id="main" class="win-client">
@@ -51,9 +53,9 @@
       </div>
     </main>
     <footer class="win-statusbar" role="contentinfo">
-      {% assign traffic = site.data.traffic_stats %}
+      {% assign cf = site.data.cloudflare_stats %}
       <div class="inner win-status-inner">
-        <span class="win-status-left">Ready.{% if traffic %}<span class="win-status-hits" title="Daily totals from GitHub repository Traffic (includes this site on GitHub Pages). Updated by a scheduled workflow."> · Page views: {{ traffic.all_time_views }} all-time · {{ traffic.last_7_days_views }} last 7 days</span>{% endif %}</span>
+        <span class="win-status-left">Ready.{% if cf.last_updated and cf.last_updated != "" %}<span class="win-status-hits" title="Visitor totals from Cloudflare proxied traffic (daily sync). 7-day uniques are summed per day."> · Visitors: {{ cf.all_time_page_views }} page views all-time · {{ cf.last_7_days_visitors }} unique last 7 days</span>{% endif %}</span>
         <span class="win-status-right">&copy; {{ site.time | date: '%Y' }} · <a href="https://pages.github.com/">GitHub Pages</a></span>
       </div>
     </footer>
