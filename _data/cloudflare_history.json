@@ -71,10 +71,15 @@
       "uniques": 130
     },
     "2026-07-07": {
-      "page_views": 57,
-      "requests": 493,
-      "uniques": 46
+      "page_views": 111,
+      "requests": 1656,
+      "uniques": 122
+    },
+    "2026-07-08": {
+      "page_views": 26,
+      "requests": 356,
+      "uniques": 37
     }
   },
-  "last_sync": "2026-07-07T09:59:00Z"
+  "last_sync": "2026-07-08T08:42:26Z"
 }
