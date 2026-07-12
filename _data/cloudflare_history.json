@@ -91,10 +91,15 @@
       "uniques": 168
     },
     "2026-07-11": {
-      "page_views": 19,
-      "requests": 132,
-      "uniques": 38
+      "page_views": 100,
+      "requests": 773,
+      "uniques": 161
+    },
+    "2026-07-12": {
+      "page_views": 13,
+      "requests": 391,
+      "uniques": 22
     }
   },
-  "last_sync": "2026-07-11T08:13:14Z"
+  "last_sync": "2026-07-12T08:29:48Z"
 }
