@@ -30,7 +30,8 @@ jobs:
         uses: actions/checkout@v6
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
-          fetch-depth: 2
+          # Need both parents of merge commits (e.g. post tip + pulled analytics).
+          fetch-depth: 10
 
       - name: Notify subscribers
         env:

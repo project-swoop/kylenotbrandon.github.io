@@ -106,11 +106,32 @@ def new_post_files() -> list[str]:
         return []
 
     try:
-        out = run_git("diff", "--name-only", "--diff-filter=A", "HEAD~1", "HEAD", "--", "_posts/")
+        # "sha parent1 [parent2 ...]" — merge commits have 2+ parents.
+        # Diffing only HEAD~1 misses posts that already exist on the first
+        # parent (typical after git pull merges remote analytics into a post tip).
+        parts = run_git("rev-list", "--parents", "-n", "1", "HEAD").split()
+        if len(parts) < 2:
+            return []
+        head, *parents = parts
+        files: set[str] = set()
+        for parent in parents:
+            out = run_git(
+                "diff",
+                "--name-only",
+                "--diff-filter=A",
+                parent,
+                head,
+                "--",
+                "_posts/",
+            )
+            for line in out.splitlines():
+                path = line.strip()
+                if path.endswith(".md"):
+                    files.add(path)
+        return sorted(files)
     except subprocess.CalledProcessError as exc:
         print(f"git diff failed: {exc.stderr}", file=sys.stderr)
         return []
-    return [line.strip() for line in out.splitlines() if line.strip().endswith(".md")]
 
 
 def latest_post_file() -> Path | None:
