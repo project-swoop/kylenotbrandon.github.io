@@ -66,10 +66,95 @@
       "uniques": 80
     },
     "2026-07-06": {
-      "page_views": 54,
-      "requests": 405,
-      "uniques": 61
+      "page_views": 162,
+      "requests": 2294,
+      "uniques": 130
+    },
+    "2026-07-07": {
+      "page_views": 111,
+      "requests": 1656,
+      "uniques": 122
+    },
+    "2026-07-08": {
+      "page_views": 76,
+      "requests": 744,
+      "uniques": 128
+    },
+    "2026-07-09": {
+      "page_views": 113,
+      "requests": 773,
+      "uniques": 153
+    },
+    "2026-07-10": {
+      "page_views": 103,
+      "requests": 2161,
+      "uniques": 168
+    },
+    "2026-07-11": {
+      "page_views": 100,
+      "requests": 773,
+      "uniques": 161
+    },
+    "2026-07-12": {
+      "page_views": 50,
+      "requests": 600,
+      "uniques": 93
+    },
+    "2026-07-13": {
+      "page_views": 52,
+      "requests": 397,
+      "uniques": 96
+    },
+    "2026-07-14": {
+      "page_views": 102,
+      "requests": 1363,
+      "uniques": 264
+    },
+    "2026-07-15": {
+      "page_views": 93,
+      "requests": 3641,
+      "uniques": 145
+    },
+    "2026-07-16": {
+      "page_views": 141,
+      "requests": 1427,
+      "uniques": 156
+    },
+    "2026-07-17": {
+      "page_views": 69,
+      "requests": 650,
+      "uniques": 77
+    },
+    "2026-07-18": {
+      "page_views": 77,
+      "requests": 489,
+      "uniques": 96
+    },
+    "2026-07-19": {
+      "page_views": 68,
+      "requests": 2390,
+      "uniques": 91
+    },
+    "2026-07-20": {
+      "page_views": 95,
+      "requests": 842,
+      "uniques": 94
+    },
+    "2026-07-21": {
+      "page_views": 98,
+      "requests": 969,
+      "uniques": 192
+    },
+    "2026-07-22": {
+      "page_views": 36,
+      "requests": 186,
+      "uniques": 76
+    },
+    "2026-07-23": {
+      "page_views": 20,
+      "requests": 840,
+      "uniques": 34
     }
   },
-  "last_sync": "2026-07-06T12:49:27Z"
+  "last_sync": "2026-07-23T08:42:47Z"
 }
