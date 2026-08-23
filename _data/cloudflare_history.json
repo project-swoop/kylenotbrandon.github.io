@@ -301,10 +301,15 @@
       "uniques": 176
     },
     "2026-08-22": {
-      "page_views": 28,
-      "requests": 2444,
-      "uniques": 43
+      "page_views": 67,
+      "requests": 5274,
+      "uniques": 112
+    },
+    "2026-08-23": {
+      "page_views": 31,
+      "requests": 69,
+      "uniques": 21
     }
   },
-  "last_sync": "2026-08-22T06:57:04Z"
+  "last_sync": "2026-08-23T06:58:35Z"
 }
