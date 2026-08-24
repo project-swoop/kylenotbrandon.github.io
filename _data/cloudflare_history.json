@@ -306,10 +306,15 @@
       "uniques": 112
     },
     "2026-08-23": {
-      "page_views": 31,
-      "requests": 69,
-      "uniques": 21
+      "page_views": 94,
+      "requests": 874,
+      "uniques": 95
+    },
+    "2026-08-24": {
+      "page_views": 26,
+      "requests": 78,
+      "uniques": 43
     }
   },
-  "last_sync": "2026-08-23T06:58:35Z"
+  "last_sync": "2026-08-24T07:18:10Z"
 }
