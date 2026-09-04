@@ -346,10 +346,30 @@
       "uniques": 135
     },
     "2026-08-31": {
-      "page_views": 38,
-      "requests": 467,
-      "uniques": 46
+      "page_views": 71,
+      "requests": 1266,
+      "uniques": 98
+    },
+    "2026-09-01": {
+      "page_views": 116,
+      "requests": 1658,
+      "uniques": 245
+    },
+    "2026-09-02": {
+      "page_views": 111,
+      "requests": 3725,
+      "uniques": 112
+    },
+    "2026-09-03": {
+      "page_views": 110,
+      "requests": 1528,
+      "uniques": 163
+    },
+    "2026-09-04": {
+      "page_views": 55,
+      "requests": 587,
+      "uniques": 40
     }
   },
-  "last_sync": "2026-08-31T13:43:33Z"
+  "last_sync": "2026-09-04T11:14:11Z"
 }
