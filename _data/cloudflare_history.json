@@ -371,10 +371,15 @@
       "uniques": 129
     },
     "2026-09-05": {
-      "page_views": 20,
-      "requests": 124,
-      "uniques": 34
+      "page_views": 46,
+      "requests": 203,
+      "uniques": 74
+    },
+    "2026-09-06": {
+      "page_views": 37,
+      "requests": 686,
+      "uniques": 96
     }
   },
-  "last_sync": "2026-09-05T10:31:25Z"
+  "last_sync": "2026-09-06T10:52:46Z"
 }
