@@ -401,10 +401,15 @@
       "uniques": 149
     },
     "2026-09-11": {
-      "page_views": 48,
-      "requests": 646,
-      "uniques": 34
+      "page_views": 112,
+      "requests": 1494,
+      "uniques": 105
+    },
+    "2026-09-12": {
+      "page_views": 71,
+      "requests": 423,
+      "uniques": 25
     }
   },
-  "last_sync": "2026-09-11T11:16:39Z"
+  "last_sync": "2026-09-12T10:42:11Z"
 }
