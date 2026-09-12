@@ -1,0 +1,100 @@
+{% assign contact_url = site.newsletter.apps_script_url %}
+{% if include.context == "post" %}
+<section class="contact-section" aria-labelledby="contact-heading">
+  <h2 id="contact-heading">Reply to this post</h2>
+  <p>Questions? Comments? Criticisms? Corrections? Write me an email below, and I'll try to get back to you.</p>
+{% endif %}
+
+{% if contact_url == "" or contact_url contains "REPLACE_ME" %}
+<p class="contact-notice">The contact form is not configured yet. You can still email <a href="mailto:kylenotbrandon@gmail.com">kylenotbrandon@gmail.com</a>.</p>
+{% else %}
+<div class="contact-panel contact-success contact-is-hidden" data-contact-success role="status">
+  <p><strong>Message sent.</strong> Thanks for reaching out! I’ll email you back as soon as I can.</p>
+</div>
+
+<div class="contact-panel contact-error contact-is-hidden" data-contact-error role="alert">
+  <p><strong>Something went wrong.</strong> Please try again or email <a href="mailto:kylenotbrandon@gmail.com">kylenotbrandon@gmail.com</a>.</p>
+</div>
+
+<form class="contact-form" action="{{ contact_url }}" method="post" target="contact-frame">
+  <input type="hidden" name="action" value="contact">
+  <input type="hidden" name="page_title" value="{{ page.title | default: 'Contact page' | escape }}">
+  <input type="hidden" name="page_url" value="{{ page.url | absolute_url | escape }}">
+
+  <div class="contact-field">
+    <label for="contact-name-{{ include.context }}">Name</label>
+    <input id="contact-name-{{ include.context }}" name="name" type="text" required maxlength="100" autocomplete="name">
+  </div>
+
+  <div class="contact-field">
+    <label for="contact-email-{{ include.context }}">Email address</label>
+    <input id="contact-email-{{ include.context }}" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="you@example.com">
+  </div>
+
+  <div class="contact-field contact-field-wide">
+    <label for="contact-message-{{ include.context }}">Message</label>
+    <textarea id="contact-message-{{ include.context }}" name="message" required maxlength="5000" rows="7"></textarea>
+  </div>
+
+  <div class="contact-honeypot" aria-hidden="true">
+    <label for="contact-website-{{ include.context }}">Website</label>
+    <input id="contact-website-{{ include.context }}" name="website" type="text" tabindex="-1" autocomplete="off">
+  </div>
+
+  <button type="submit" class="contact-button">Send email</button>
+</form>
+
+<iframe class="contact-hidden-frame" name="contact-frame" title="Contact form submission" tabindex="-1"></iframe>
+
+<noscript>
+  <p class="contact-notice">This form needs JavaScript to confirm delivery. You can also email <a href="mailto:kylenotbrandon@gmail.com">kylenotbrandon@gmail.com</a>.</p>
+</noscript>
+
+<script>
+(function () {
+  var forms = document.querySelectorAll('.contact-form');
+
+  for (var i = 0; i < forms.length; i++) {
+    (function (form) {
+      var frame = form.nextElementSibling;
+      var success = form.parentNode.querySelector('[data-contact-success]');
+      var error = form.parentNode.querySelector('[data-contact-error]');
+      var submitButton = form.querySelector('button[type="submit"]');
+
+      if (!frame) return;
+
+      form.addEventListener('submit', function () {
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = 'Sending...';
+        }
+        if (error) error.classList.add('contact-is-hidden');
+
+        var timedOut = false;
+        var timeout = window.setTimeout(function () {
+          timedOut = true;
+          if (error) error.classList.remove('contact-is-hidden');
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Send email';
+          }
+        }, 15000);
+
+        frame.onload = function () {
+          window.clearTimeout(timeout);
+          if (!timedOut) {
+            if (success) success.classList.remove('contact-is-hidden');
+            form.classList.add('contact-is-hidden');
+          }
+          frame.onload = null;
+        };
+      });
+    })(forms[i]);
+  }
+})();
+</script>
+{% endif %}
+
+{% if include.context == "post" %}
+</section>
+{% endif %}

@@ -13,6 +13,7 @@
  *   SITE_TITLE         — kyle speaks on...
  *   SUBSCRIBE_REDIRECT — optional legacy; subscribe stays on the blog now
  *   FROM_NAME          — kyle speaks on...
+ *   CONTACT_EMAIL      — optional; defaults to kylenotbrandon@gmail.com
  */
 
 var PROPS = PropertiesService.getScriptProperties();
@@ -26,6 +27,7 @@ function getConfig() {
     templateUrl: PROPS.getProperty('TEMPLATE_URL'),
     subscribeRedirect: PROPS.getProperty('SUBSCRIBE_REDIRECT') || 'https://kylenotbrandon.blog/subscribe/?done=1',
     fromName: PROPS.getProperty('FROM_NAME') || 'kyle speaks on...',
+    contactEmail: PROPS.getProperty('CONTACT_EMAIL') || 'kylenotbrandon@gmail.com',
     webAppUrl: PROPS.getProperty('WEB_APP_URL') || ScriptApp.getService().getUrl(),
   };
 }
@@ -82,6 +84,10 @@ function doPost(e) {
     return handleSubscribe(params.email);
   }
 
+  if (action === 'contact') {
+    return handleContact(params);
+  }
+
   var body = {};
   if (e && e.postData && e.postData.contents) {
     try {
@@ -96,6 +102,51 @@ function doPost(e) {
   }
 
   return jsonResponse({ ok: false, error: 'unknown action' });
+}
+
+function handleContact(params) {
+  var name = String(params.name || '').trim().replace(/[\r\n]+/g, ' ');
+  var email = normalizeEmail(params.email);
+  var message = String(params.message || '').trim();
+  var pageTitle = String(params.page_title || '').trim().replace(/[\r\n]+/g, ' ');
+  var pageUrl = String(params.page_url || '').trim();
+  var honeypot = String(params.website || '').trim();
+
+  // Silently accept bot submissions so the honeypot is not advertised.
+  if (honeypot) {
+    return contactAck();
+  }
+
+  if (
+    !name ||
+    name.length > 100 ||
+    !email ||
+    email.length > 254 ||
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
+    !message ||
+    message.length > 5000
+  ) {
+    return HtmlService.createHtmlOutput('<!DOCTYPE html><html><body>invalid</body></html>');
+  }
+
+  var cfg = getConfig();
+  var context = pageTitle ? ' — ' + pageTitle.slice(0, 150) : '';
+  var body =
+    'Name: ' + name + '\n' +
+    'Email: ' + email + '\n' +
+    (pageUrl ? 'Page: ' + pageUrl.slice(0, 500) + '\n' : '') +
+    '\n' + message;
+
+  GmailApp.sendEmail(cfg.contactEmail, '[Blog contact] ' + name + context, body, {
+    name: cfg.fromName,
+    replyTo: email,
+  });
+
+  return contactAck();
+}
+
+function contactAck() {
+  return HtmlService.createHtmlOutput('<!DOCTYPE html><html><body>ok</body></html>');
 }
 
 function handleSubscribe(email) {

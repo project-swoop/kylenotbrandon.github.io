@@ -814,3 +814,122 @@ input[type="text"] {
   max-width: 32rem;
 }
 
+/* Contact form */
+.contact-section {
+  margin-top: 28px;
+  padding-top: 14px;
+  border-top: 2px groove var(--face);
+}
+
+.contact-section h2 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.contact-section > p {
+  margin-top: 0;
+}
+
+.contact-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  gap: 10px 12px;
+  margin: 16px 0;
+  padding: 12px 14px;
+  border: 2px groove var(--face);
+  background: var(--face-dark);
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contact-field-wide,
+.contact-button {
+  grid-column: 1 / -1;
+}
+
+.contact-field label {
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  font: 12px var(--font-ui);
+  width: 100%;
+  min-width: 0;
+  padding: 3px 4px;
+  background: var(--field-bg);
+  color: var(--text);
+  border: 2px solid;
+  border-color: #7c7c7c #fff #fff #7c7c7c;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  line-height: 1.4;
+}
+
+.contact-button {
+  justify-self: start;
+  font: 12px var(--font-ui);
+  font-weight: 700;
+  padding: 4px 14px;
+  cursor: pointer;
+  color: var(--text);
+  background: var(--face);
+  border: 2px solid;
+  border-color: #fff #404040 #404040 #fff;
+}
+
+.contact-button:active {
+  border-color: #404040 #fff #fff #404040;
+}
+
+.contact-button:disabled {
+  color: #808080;
+  cursor: wait;
+}
+
+.contact-panel,
+.contact-notice {
+  width: 100%;
+  margin: 16px 0;
+  padding: 10px 12px;
+  border: 2px groove var(--face);
+  background: var(--face-dark);
+}
+
+.contact-success {
+  border-color: #fff #404040 #404040 #fff;
+}
+
+.contact-error {
+  border-color: #404040 #fff #fff #404040;
+  color: #800000;
+}
+
+.contact-is-hidden,
+.contact-honeypot {
+  display: none !important;
+}
+
+.contact-hidden-frame {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 0;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+@media (max-width: 32rem) {
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
+}

@@ -12,6 +12,7 @@ Email subscribers when you publish a new post. The blog sends themed HTML mail a
 | `.github/workflows/notify-subscribers.yml` | Runs after Pages deploy |
 | `subscribe.md` | Reader signup form |
 | `_config.yml` → `newsletter.apps_script_url` | Web app URL for the form |
+| `_includes/contact-form.html` | Contact form used on the contact page and posts |
 
 ## One-time setup (~15 minutes)
 
@@ -90,6 +91,14 @@ After you change the template, push to `main`. The next send fetches the updated
 - The first time you send, Google may show a security review screen; approve it for your account.
 - If secrets are missing, the notify workflow skips quietly (deploy still succeeds).
 - Unsubscribe links in emails point to `kylenotbrandon.blog/unsubscribe/?t=…` so readers never land on `scripts.google.com`. Gmail’s one-click header still uses the Apps Script URL directly (invisible to most readers).
+
+## Contact form
+
+The same Apps Script web app handles contact form submissions and sends them to `kylenotbrandon@gmail.com`. After changing `.github/newsletter/Code.gs`, paste the updated file into Apps Script and deploy a new version through **Deploy → Manage deployments → Edit → New version → Deploy**.
+
+`CONTACT_EMAIL` is an optional Script property. If it is not set, the recipient defaults to `kylenotbrandon@gmail.com`.
+
+Deploying the updated script may prompt the Apps Script owner to authorize Gmail access if that permission was not already granted by the newsletter sender.
 
 ## Troubleshooting
 
