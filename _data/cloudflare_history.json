@@ -416,10 +416,15 @@
       "uniques": 87
     },
     "2026-09-14": {
-      "page_views": 70,
-      "requests": 2336,
-      "uniques": 66
+      "page_views": 185,
+      "requests": 3745,
+      "uniques": 200
+    },
+    "2026-09-15": {
+      "page_views": 64,
+      "requests": 874,
+      "uniques": 152
     }
   },
-  "last_sync": "2026-09-14T12:40:47Z"
+  "last_sync": "2026-09-15T11:40:36Z"
 }
