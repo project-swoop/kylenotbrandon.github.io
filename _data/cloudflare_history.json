@@ -441,10 +441,15 @@
       "uniques": 268
     },
     "2026-09-19": {
-      "page_views": 19,
-      "requests": 56,
-      "uniques": 31
+      "page_views": 46,
+      "requests": 762,
+      "uniques": 77
+    },
+    "2026-09-20": {
+      "page_views": 47,
+      "requests": 4972,
+      "uniques": 76
     }
   },
-  "last_sync": "2026-09-19T10:54:27Z"
+  "last_sync": "2026-09-20T11:18:43Z"
 }
