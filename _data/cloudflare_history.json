@@ -451,10 +451,15 @@
       "uniques": 137
     },
     "2026-09-21": {
-      "page_views": 55,
-      "requests": 1216,
-      "uniques": 89
+      "page_views": 81,
+      "requests": 2668,
+      "uniques": 129
+    },
+    "2026-09-22": {
+      "page_views": 34,
+      "requests": 4149,
+      "uniques": 48
     }
   },
-  "last_sync": "2026-09-21T12:43:19Z"
+  "last_sync": "2026-09-22T11:33:43Z"
 }
