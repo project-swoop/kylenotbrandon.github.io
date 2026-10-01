@@ -496,10 +496,15 @@
       "uniques": 128
     },
     "2026-09-30": {
-      "page_views": 24,
-      "requests": 1056,
-      "uniques": 47
+      "page_views": 54,
+      "requests": 2935,
+      "uniques": 80
+    },
+    "2026-10-01": {
+      "page_views": 45,
+      "requests": 4841,
+      "uniques": 51
     }
   },
-  "last_sync": "2026-09-30T12:30:04Z"
+  "last_sync": "2026-10-01T13:08:04Z"
 }
