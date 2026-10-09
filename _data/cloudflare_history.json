@@ -536,10 +536,15 @@
       "uniques": 145
     },
     "2026-10-08": {
-      "page_views": 80,
-      "requests": 1539,
-      "uniques": 124
+      "page_views": 171,
+      "requests": 3507,
+      "uniques": 199
+    },
+    "2026-10-09": {
+      "page_views": 67,
+      "requests": 1445,
+      "uniques": 92
     }
   },
-  "last_sync": "2026-10-08T13:23:51Z"
+  "last_sync": "2026-10-09T13:11:54Z"
 }
