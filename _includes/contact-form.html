@@ -16,6 +16,10 @@
   <p><strong>Something went wrong.</strong> Please try again or email <a href="mailto:kylenotbrandon@gmail.com">kylenotbrandon@gmail.com</a>.</p>
 </div>
 
+<div class="contact-panel contact-error contact-is-hidden" data-contact-banned role="alert">
+  <p><strong>FUCK YOU YOU LITTLE SHIT!!!</strong> I don't want to hear about you asking for my "price" like I'm a prostitute.</p>
+</div>
+
 <form class="contact-form" action="{{ contact_url }}" method="post" target="contact-frame">
   <input type="hidden" name="action" value="contact">
   <input type="hidden" name="page_title" value="{{ page.title | default: 'Contact page' | escape }}">
@@ -62,6 +66,20 @@
       var submitButton = form.querySelector('button[type="submit"]');
 
       if (!frame) return;
+
+      var banned = form.parentNode.querySelector('[data-contact-banned]');
+      var bannedNames = ['robertneelp'];
+
+      form.addEventListener('submit', function (event) {
+        var nameInput = form.querySelector('input[name="name"]');
+        var normalized = nameInput ? nameInput.value.toLowerCase().replace(/[^a-z0-9]/g, '') : '';
+        if (bannedNames.indexOf(normalized) !== -1) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          if (error) error.classList.add('contact-is-hidden');
+          if (banned) banned.classList.remove('contact-is-hidden');
+        }
+      });
 
       form.addEventListener('submit', function () {
         if (submitButton) {
