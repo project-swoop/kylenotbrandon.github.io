@@ -561,10 +561,15 @@
       "uniques": 76
     },
     "2026-10-13": {
-      "page_views": 36,
-      "requests": 4551,
-      "uniques": 51
+      "page_views": 61,
+      "requests": 4955,
+      "uniques": 106
+    },
+    "2026-10-14": {
+      "page_views": 53,
+      "requests": 450,
+      "uniques": 41
     }
   },
-  "last_sync": "2026-10-13T14:06:44Z"
+  "last_sync": "2026-10-14T11:46:48Z"
 }
