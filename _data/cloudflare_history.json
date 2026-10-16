@@ -571,10 +571,15 @@
       "uniques": 94
     },
     "2026-10-15": {
-      "page_views": 39,
-      "requests": 180,
-      "uniques": 94
+      "page_views": 90,
+      "requests": 732,
+      "uniques": 169
+    },
+    "2026-10-16": {
+      "page_views": 19,
+      "requests": 519,
+      "uniques": 29
     }
   },
-  "last_sync": "2026-10-15T11:24:20Z"
+  "last_sync": "2026-10-16T11:18:03Z"
 }
