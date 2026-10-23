@@ -606,10 +606,15 @@
       "uniques": 228
     },
     "2026-10-22": {
-      "page_views": 28,
-      "requests": 711,
-      "uniques": 46
+      "page_views": 69,
+      "requests": 1397,
+      "uniques": 108
+    },
+    "2026-10-23": {
+      "page_views": 64,
+      "requests": 2550,
+      "uniques": 97
     }
   },
-  "last_sync": "2026-10-22T11:46:27Z"
+  "last_sync": "2026-10-23T11:33:25Z"
 }
