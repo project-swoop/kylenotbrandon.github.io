@@ -611,10 +611,15 @@
       "uniques": 108
     },
     "2026-10-23": {
-      "page_views": 64,
-      "requests": 2550,
-      "uniques": 97
+      "page_views": 93,
+      "requests": 2893,
+      "uniques": 162
+    },
+    "2026-10-24": {
+      "page_views": 23,
+      "requests": 545,
+      "uniques": 33
     }
   },
-  "last_sync": "2026-10-23T11:33:25Z"
+  "last_sync": "2026-10-24T10:53:42Z"
 }
