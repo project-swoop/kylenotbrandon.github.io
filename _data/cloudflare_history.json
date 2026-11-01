@@ -651,10 +651,15 @@
       "uniques": 183
     },
     "2026-10-31": {
-      "page_views": 82,
-      "requests": 2475,
-      "uniques": 70
+      "page_views": 140,
+      "requests": 3387,
+      "uniques": 102
+    },
+    "2026-11-01": {
+      "page_views": 74,
+      "requests": 1180,
+      "uniques": 68
     }
   },
-  "last_sync": "2026-10-31T12:19:51Z"
+  "last_sync": "2026-11-01T13:15:59Z"
 }
