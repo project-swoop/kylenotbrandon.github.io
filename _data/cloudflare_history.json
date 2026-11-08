@@ -686,10 +686,15 @@
       "uniques": 127
     },
     "2026-11-07": {
-      "page_views": 43,
-      "requests": 1739,
-      "uniques": 67
+      "page_views": 71,
+      "requests": 2016,
+      "uniques": 112
+    },
+    "2026-11-08": {
+      "page_views": 32,
+      "requests": 1025,
+      "uniques": 51
     }
   },
-  "last_sync": "2026-11-07T12:55:17Z"
+  "last_sync": "2026-11-08T13:17:50Z"
 }
