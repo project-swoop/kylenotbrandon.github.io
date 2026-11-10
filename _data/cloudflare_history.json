@@ -696,10 +696,15 @@
       "uniques": 120
     },
     "2026-11-09": {
-      "page_views": 40,
-      "requests": 1665,
-      "uniques": 110
+      "page_views": 65,
+      "requests": 1988,
+      "uniques": 190
+    },
+    "2026-11-10": {
+      "page_views": 25,
+      "requests": 838,
+      "uniques": 63
     }
   },
-  "last_sync": "2026-11-09T16:09:49Z"
+  "last_sync": "2026-11-10T14:48:43Z"
 }
