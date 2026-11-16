@@ -1,7 +1,7 @@
 # Auto-updated by .github/workflows/update-traffic.yml (Cloudflare GraphQL)
 # all_time_page_views sums daily page-view totals recorded since this workflow was enabled.
 # last_7_days_visitors sums daily unique-visitor counts for the rolling 7-day window.
-all_time_page_views: 13731
-last_7_days_visitors: 694
-last_7_days_page_views: 439
-last_updated: "2026-11-15T13:52:53Z"
+all_time_page_views: 13799
+last_7_days_visitors: 606
+last_7_days_page_views: 442
+last_updated: "2026-11-16T15:37:47Z"
