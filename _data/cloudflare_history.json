@@ -731,10 +731,15 @@
       "uniques": 75
     },
     "2026-11-16": {
-      "page_views": 35,
-      "requests": 992,
-      "uniques": 59
+      "page_views": 61,
+      "requests": 1102,
+      "uniques": 85
+    },
+    "2026-11-17": {
+      "page_views": 48,
+      "requests": 1223,
+      "uniques": 70
     }
   },
-  "last_sync": "2026-11-16T15:37:47Z"
+  "last_sync": "2026-11-17T15:55:51Z"
 }
