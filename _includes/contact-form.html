@@ -70,14 +70,32 @@
       var banned = form.parentNode.querySelector('[data-contact-banned]');
       var bannedNames = ['robertneelp'];
 
+      function showBanned() {
+        if (error) error.classList.add('contact-is-hidden');
+        if (success) success.classList.add('contact-is-hidden');
+        form.classList.remove('contact-is-hidden');
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Send email';
+        }
+        if (banned) banned.classList.remove('contact-is-hidden');
+      }
+
+      // The server tells us when it rejected the sender as banned.
+      window.addEventListener('message', function (event) {
+        if (event.data && event.data.type === 'contact-banned') showBanned();
+      });
+
       form.addEventListener('submit', function (event) {
         var nameInput = form.querySelector('input[name="name"]');
         var normalized = nameInput ? nameInput.value.toLowerCase().replace(/[^a-z0-9]/g, '') : '';
-        if (bannedNames.indexOf(normalized) !== -1) {
-          event.preventDefault();
-          event.stopImmediatePropagation();
-          if (error) error.classList.add('contact-is-hidden');
-          if (banned) banned.classList.remove('contact-is-hidden');
+        for (var j = 0; j < bannedNames.length; j++) {
+          if (normalized.indexOf(bannedNames[j]) !== -1) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            showBanned();
+            return;
+          }
         }
       });
 
@@ -100,7 +118,7 @@
 
         frame.onload = function () {
           window.clearTimeout(timeout);
-          if (!timedOut) {
+          if (!timedOut && !(banned && !banned.classList.contains('contact-is-hidden'))) {
             if (success) success.classList.remove('contact-is-hidden');
             form.classList.add('contact-is-hidden');
           }

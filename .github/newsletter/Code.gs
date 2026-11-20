@@ -117,6 +117,16 @@ function handleContact(params) {
     return contactAck();
   }
 
+  // Banned senders (compared case-insensitively, ignoring spaces/punctuation).
+  // The page is told to show the banned message, but no email is sent.
+  var bannedNames = ['robertneelp'];
+  var normalizedName = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+  for (var i = 0; i < bannedNames.length; i++) {
+    if (normalizedName.indexOf(bannedNames[i]) !== -1) {
+      return contactBannedAck();
+    }
+  }
+
   if (
     !name ||
     name.length > 100 ||
@@ -147,6 +157,15 @@ function handleContact(params) {
 
 function contactAck() {
   return HtmlService.createHtmlOutput('<!DOCTYPE html><html><body>ok</body></html>');
+}
+
+/** Tells the embedding page to show the banned message (no email is sent). */
+function contactBannedAck() {
+  return HtmlService.createHtmlOutput(
+    '<!DOCTYPE html><html><body>banned<script>' +
+      'window.parent.postMessage({type:"contact-banned"},"*");' +
+      '</script></body></html>'
+  );
 }
 
 function handleSubscribe(email) {
